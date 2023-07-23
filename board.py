@@ -11,7 +11,7 @@ import pygame
 
 class Board:
     """
-    Initializes a new sudoku board object.
+    Initializes a new Sudoku board object.
     """
     def __init__(self, width, height, screen, difficulty):
         self.width = width
