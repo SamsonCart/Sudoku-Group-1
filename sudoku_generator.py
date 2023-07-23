@@ -1,4 +1,4 @@
-import math,random
+import math, random
 
 """
 This was adapted from a GeeksforGeeks article "Program for Sudoku Generator" by Aarti_Rathi and Ankur Trisal
@@ -42,7 +42,7 @@ class SudokuGenerator:
 	Return: None
     '''
     def print_board(self):
-        pass
+        print(self.board)
 
     '''
 	Determines if num is contained in the specified row (horizontal) of the board
@@ -96,7 +96,13 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def is_valid(self, row, col, num):
-        pass
+        a = valid_in_row(row, num)
+        b = valid_in_col(col, num)
+        c = valid_in_box( row // 3, col // 3, num)
+        if a and b and c:
+            return True
+        else:
+            return False
 
     '''
     Fills the specified 3x3 box with values
