@@ -86,7 +86,13 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_col(self, col, num):
-        pass
+        col_list = []
+        for cell in range(9):
+            col_list.append(self.board[cell][col])
+        if num in col_list:
+            return False
+        else:
+            return True
 
     '''
 	Determines if num is contained in the 3x3 box specified on the board
