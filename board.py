@@ -90,7 +90,14 @@ class Board:
             row = x // (self.width / 9)
             col = y // (self.height / 9)
             return (row, col)
-        
+
+    '''
+    Clears the value cell. Note that the user can only remove the cell values 
+    and sketched value that are filled by themselves.
+    '''
+    def clear(self):
+        pass
+    
     '''
     Sets the sketched value of the current selected cell equal to user entered value.
     It will be displayed at the top left corner of the cell using the draw() function. 
