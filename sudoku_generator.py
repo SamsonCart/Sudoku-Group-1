@@ -128,7 +128,7 @@ class SudokuGenerator:
     def is_valid(self, row, col, num):
         a = valid_in_row(row, num)
         b = valid_in_col(col, num)
-        c = valid_in_box( row // 3, col // 3, num)
+        c = valid_in_box( row, col, num)
         if a and b and c:
             return True
         else:
