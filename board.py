@@ -98,7 +98,10 @@ class Board:
     def clear(self):
         # if the cell is an editable cell
             # self.value = 0
-        if '''todo establish editable cell vs uneditable cell''':
+        for i in range(9):
+            for j in range(9):
+                if self.board[i][j] is #FIXME 
+                : '''establish editable cell vs uneditable cell'''
             self.value = 0
     
     '''
@@ -123,6 +126,13 @@ class Board:
     def is_full(self):
         pass
 
+    '''
+    Reset all cells in the board to their original values 
+    (0 if cleared, otherwise the corresponding digit).
+    '''
+    def reset_to_original(self):
+        pass
+    
     """
     Updates the underlying 2D board with the values in all cells.
     """
