@@ -96,7 +96,10 @@ class Board:
     and sketched value that are filled by themselves.
     '''
     def clear(self):
-        pass
+        # if the cell is an editable cell
+            # self.value = 0
+        if '''todo establish editable cell vs uneditable cell''':
+            self.value = 0
     
     '''
     Sets the sketched value of the current selected cell equal to user entered value.
