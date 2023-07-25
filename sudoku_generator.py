@@ -182,7 +182,10 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_diagonal(self):
-        pass
+        fill_box(0,0)
+	fill_box(3,3)
+	fill_box(6,6)
+	    
 
     '''
     DO NOT CHANGE
@@ -247,8 +250,16 @@ class SudokuGenerator:
 	Parameters: None
 	Return: None
     '''
-    def remove_cells(self):
-        pass
+    def remove_cells(self, difficulty):
+        if self.difficulty == # lowest instance of difficulty:
+		pass # remove 30 cells out of 81
+	elif self.difficulty == # medium instance of difficulty:
+		pass # remove 40
+	elif self.difficulty == # hard instance of difficulty:
+		pass # remove 50
+
+	# iterate thorugh a while loop w/ a counter, while the counter is below 
+	# diffculty count, continue to move through 
 
 '''
 DO NOT CHANGE
