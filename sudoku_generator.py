@@ -55,8 +55,25 @@ class SudokuGenerator:
 	Return: boolean
     '''
     def valid_in_row(self, row, num):
-        pass
-
+      row_number = row
+      ''' Diamond's Notes/Comments
+      Determines if num is contained in the specified row (horizontal) of the board. <--------> single row w/ multiple columns/row_indexes
+  
+      #Parameters:
+        row is the index of the row we are checking.
+        row(the variable) could be a list with nums as elements----> ex. [1, 2, 0, 3, 4, 6, 7, 0 , 9]
+        each element is in a different column.
+      
+    	  num (1-9) is the value we are looking for in the row list. ----> ex. 5 and 6
+        num 0 could represent the blank space?
+      '''
+  
+      for row_index in range(len(self.board)): #looking at the whole sudoku board first(?)
+        if row_index < self.row_length: #length of the whole row is 9 or (0 - 8).
+          if self.board[row_number][row_index] == int(num): #looks at each index in a single row and compares it to num.
+            return False  #If num is already in the specified row (ex. '6'), return Boolean False.
+      return True #Otherwise (ex. '5', return Boolean True)
+    
     '''
 	Determines if num is contained in the specified column (vertical) of the board
     If num is already in the specified col, return False. Otherwise, return True
@@ -115,7 +132,34 @@ class SudokuGenerator:
 	Return: None
     '''
     def fill_box(self, row_start, col_start):
-        pass
+      #Randomly fills in values in the 3x3 box from (row_start, col_start) to (row_start+2, col_start+2)
+      #Uses 'unused_in_box' (??) to ensure no value occurs in the box more than once.
+      unused_in_box = [1,2,3,4,5,6,7,8,9]
+  
+      '''Diamond's Note/Comments
+        Fills the specified 3x3 box with values
+        For each position, generates a random digit which has not yet been used in the box
+      
+        Parameters:
+        row_start and col_start are the starting indices of the box to check
+        i.e. the box is from (row_start, col_start) to (row_start+2, col_start+2)\
+       
+        Return: None
+                        #  +1  +2
+           box ----> #  0   0   0
+                    +1  0   0   0
+                    +2  0   0   0
+       ''' 
+      for row_num in range(row_start, row_start + 3): # includes row_start #,+1,+2
+        for col_num in range(col_start, col_start + 3): # includes col_start #,+1,+2
+          if self.board[row_num][col_num] == 0: #I think we or the user determines which 3x3 box on the sudoku board to use? 
+            random_num = random.randint(1, 9) #selects a random number from 1 to 9. Need 'import random' for this.
+          
+            while random_num not in unused_in_box: #the same random number cannot be used twice, the unused_in_box keeps track of unused random numbers.
+              random_num = random.randint(1, 9) # keeps randomizing a number until an unused one appears.
+            
+            self.board[row_num][col_num] == random_num #...0 will becomes the chosen random number.
+            unused_in_box.remove(random_num) #This random number is removed from unused_box.
     
     '''
     Fills the three boxes along the main diagonal of the board
