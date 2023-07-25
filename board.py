@@ -142,6 +142,12 @@ class Board:
                 cell.value = cell.sketched_value
 
     '''
+    Find an empty cell and returns it's row and col as a tuple (x,y)
+    '''
+    def find_empty(self):
+        pass
+        
+    '''
     Check whether the Sudoku board is solved correctly
     '''
     def check_board(self):
