@@ -7,6 +7,7 @@ UF COP 3502C in Summer 2023.
 
 
 import cell
+from constants import *
 
 
 selected_cell = None
@@ -22,7 +23,48 @@ class Board:
         self.screen = screen
         self.difficulty = difficulty
         self.board = ["", "", "", "", "", "", "", "", ""] * 9
-
+    """
+    Draws an outline of the Sudoku grid, with bold lines to delineate the 3 x 3 boxes.
+    Draws every cell on the board
+    """
+    def draw(self):
+        # draw horizontal lines
+        for i in range(1, BOARD_ROWS):
+            if i % 3 = 0: # if i %3 is 0 then its at place 0, 3, 6 and 9, the spots for bold lines
+                pygame.draw.line(
+                    screen,
+                    LINE_COLOR,
+                    (0, i * SQUARE_SIZE),
+                    (WIDTH, i * SQUARE_SIZE),
+                    MAIN_LINE_WIDTH
+                )
+            else: # else, print normal line width
+                pygame.draw.line(
+                    screen,
+                    LINE_COLOR,
+                    (0, i * SQUARE_SIZE),
+                    (WIDTH, i * SQUARE_SIZE),
+                    LINE_WIDTH
+                )
+        # draw vertical lines
+        for i in range(1, BOARD_COLS):
+            if i % 3 = 0:
+                pygame.draw.line(
+                    screen,
+                    LINE_COLOR,
+                    (i * SQUARE_SIZE, 0),
+                    (i * SQUARE_SIZE, HEIGHT),
+                    MAIN_LINE_WIDTH
+                )
+            else:   
+                pygame.draw.line(
+                    screen,
+                    LINE_COLOR,
+                    (i * SQUARE_SIZE, 0),
+                    (i * SQUARE_SIZE, HEIGHT),
+                    LINE_WIDTH
+                )
+    
     '''
     Marks the cell at (row, col) in the board as the current selected cell.
     A Board object has 81 Cell objects. ---> 9 x 9 
