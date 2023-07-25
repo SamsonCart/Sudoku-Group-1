@@ -23,6 +23,19 @@ class Board:
         self.difficulty = difficulty
         self.board = ["", "", "", "", "", "", "", "", ""] * 9
 
+    '''
+    Marks the cell at (row, col) in the board as the current selected cell.
+    A Board object has 81 Cell objects. ---> 9 x 9 
+    '''
+    def select(self, row, col):
+        row_num = row   #not sure if self.width and self.height should be ultized instead.
+        col_num = col
+      
+        selected_cell = self.board[row_num][col_num]
+
+        #Once a cell has been selected, the user can edit its value or sketched value. 
+        return selected_cell
+
     """
     If a tuple of (x,y) coordinates is within the displayed board,
     this function returns a tuple of the (row,col) of the cell which
@@ -35,6 +48,13 @@ class Board:
             row = x // (self.width / 9)
             col = y // (self.height / 9)
             return (row, col)
+        
+    '''
+    Sets the sketched value of the current selected cell equal to user entered value.
+    It will be displayed at the top left corner of the cell using the draw() function. 
+    '''
+    def sketch(self,value):
+        pass
 
     """
     Sets the value of the current selected cell equal to user-entered
@@ -44,6 +64,13 @@ class Board:
         if selected_cell is not None:
             selected_cell.set_cell_value(value)
 
+
+    '''
+    Returns a Boolean value indicating whether the board is full or not. 
+    '''
+    def is_full(self):
+        pass
+
     """
     Updates the underlying 2D board with the values in all cells.
     """
@@ -51,3 +78,9 @@ class Board:
         for cell in self.board:
             if cell.value != cell.sketched_value:
                 cell.value = cell.sketched_value
+
+    '''
+    Check whether the Sudoku board is solved correctly
+    '''
+    def check_board(self):
+        pass
