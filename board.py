@@ -10,18 +10,17 @@ import cell
 from constants import *
 
 
-selected_cell = None
-
 
 class Board:
     """
     Initializes a new Sudoku board object.
     """
-    def __init__(self, width, height, screen, difficulty):
+    def __init__(self, width, height, screen, difficulty, selected_cell):
         self.width = width
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
+        self.selected_cell = selected_cell
         self.board = ["", "", "", "", "", "", "", "", ""] * 9
     """
     Draws an outline of the Sudoku grid, with bold lines to delineate the 3 x 3 boxes.
