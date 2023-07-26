@@ -124,7 +124,15 @@ class Board:
     Returns a Boolean value indicating whether the board is full or not. 
     '''
     def is_full(self):
-        pass
+        counter = 0
+        for i in range(9):
+            for j in range(9):
+                if self.board[i][j] == 0:
+                    counter += 1
+        if counter > 0:
+            return False
+        else:
+            return True
 
     '''
     Reset all cells in the board to their original values 
