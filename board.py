@@ -139,7 +139,8 @@ class Board:
     (0 if cleared, otherwise the corresponding digit).
     '''
     def reset_to_original(self):
-        pass
+        board = self.original_board
+        return board
     
     """
     Updates the underlying 2D board with the values in all cells.
