@@ -154,7 +154,13 @@ class Board:
     Find an empty cell and returns it's row and col as a tuple (x,y)
     '''
     def find_empty(self):
-        pass
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] == 0:
+                    return_tuple = (i, j)
+                    return return_tuple
+                else:
+                    return None
         
     '''
     Check whether the Sudoku board is solved correctly
