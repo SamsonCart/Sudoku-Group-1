@@ -29,7 +29,7 @@ class Board:
     def draw(self):
         # draw horizontal lines
         for i in range(1, BOARD_ROWS):
-            if i % 3 = 0: # if i %3 is 0 then its at place 0, 3, 6 and 9, the spots for bold lines
+            if i % 3 == 0: # if i %3 is 0 then its at place 0, 3, 6 and 9, the spots for bold lines
                 pygame.draw.line(
                     screen,
                     LINE_COLOR,
@@ -47,7 +47,7 @@ class Board:
                 )
         # draw vertical lines
         for i in range(1, BOARD_COLS):
-            if i % 3 = 0:
+            if i % 3 == 0:
                 pygame.draw.line(
                     screen,
                     LINE_COLOR,
@@ -94,15 +94,16 @@ class Board:
     Clears the value cell. Note that the user can only remove the cell values 
     and sketched value that are filled by themselves.
     '''
+    """
     def clear(self):
         # if the cell is an editable cell
             # self.value = 0
         for i in range(9):
             for j in range(9):
-                if self.board[i][j] is #FIXME 
+                if self.board[i][j] is 
                 : '''establish editable cell vs uneditable cell'''
             self.value = 0
-    
+    """
     '''
     Sets the sketched value of the current selected cell equal to user entered value.
     It will be displayed at the top left corner of the cell using the draw() function. 
