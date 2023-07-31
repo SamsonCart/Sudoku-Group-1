@@ -69,10 +69,10 @@ class Board:
     A Board object has 81 Cell objects. ---> 9 x 9 
     '''
     def select(self, row, col):
-        row_num = row   #not sure if self.width and self.height should be ultized instead.
-        col_num = col
+        #row_num = row ... not sure we need to assign row and col.
+        #col_num = col
       
-        selected_cell = self.board[row_num][col_num]
+        selected_cell = self.board[row][col]
 
         #Once a cell has been selected, the user can edit its value or sketched value. 
         return selected_cell
@@ -108,7 +108,9 @@ class Board:
     It will be displayed at the top left corner of the cell using the draw() function. 
     '''
     def sketch(self,value):
+        #I think value might be a digit 1-9(?) entered by user.
         self.selected_cell = value
+        return self.selected.cell
         # draw the new value(?)
 
     """
@@ -124,6 +126,8 @@ class Board:
     Returns a Boolean value indicating whether the board is full or not. 
     '''
     def is_full(self):
+        '''
+        #Original Approach
         counter = 0
         for i in range(9):
             for j in range(9):
@@ -133,6 +137,12 @@ class Board:
             return False
         else:
             return True
+        '''
+        for row in self.board:
+            for number in row:
+                if number == 0:   #0 represents empty spaces
+                    return False #means the board is not full yet
+        return True #True when board completely full.
 
     '''
     Reset all cells in the board to their original values 
@@ -166,4 +176,13 @@ class Board:
     Check whether the Sudoku board is solved correctly
     '''
     def check_board(self):
-        pass
+      #board is solved correctly if each digit (1-9) only appear once in every row/col
+      for row in range(9):
+        if self.board[row][0] != self.board[row][1] != self.board[row][2] != self.board[row][3] != self.board[row][4] != self.board[row][5] != self.board[row][6] != self.board[row][7] != self.board[row][8]
+            return True #solved correctly
+          
+      for col in range(9):
+        if self.board[0][col] != self.board[1][col] != self.board[2][col] != self.board[3][col] != self.board[4][col] != self.board[5][col] != self.board[6][col] != self.board[7][col] != self.board[8][col]
+            return True #solved correctly
+
+      return False #not solved correctly
