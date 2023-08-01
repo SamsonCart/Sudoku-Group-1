@@ -112,6 +112,50 @@ board[8][0]= '9'
 #==================================CHIP CREATION HERE=======================================
 #need numbers 1,2,3,4,5,6,7,8,9, and maybe 0???
 chip_font = pygame.font.Font(None, CHIP_FONT) #denotes the size of font.
+sketched_chip_font = pygame.font.Font(None, SKETCHED_CHIP_FONT) #denotes the size of font.
+
+
+def draw_sketched_chips():
+  #represents each chip's surface
+  sketched_chip_1_surf = sketched_chip_font.render('1', 0, SKETCHED_NUMBER_COLOR)
+  sketched_chip_2_surf = sketched_chip_font.render('2', 0, SKETCHED_NUMBER_COLOR)
+  sketched_chip_3_surf = sketched_chip_font.render('3', 0, SKETCHED_NUMBER_COLOR)
+  sketched_chip_4_surf = sketched_chip_font.render('4', 0, SKETCHED_NUMBER_COLOR)
+  sketched_chip_5_surf = sketched_chip_font.render('5', 0, SKETCHED_NUMBER_COLOR)
+  sketched_chip_6_surf = sketched_chip_font.render('6', 0, SKETCHED_NUMBER_COLOR)
+  sketched_chip_7_surf = sketched_chip_font.render('7', 0, SKETCHED_NUMBER_COLOR)
+  sketched_chip_8_surf = sketched_chip_font.render('8', 0, SKETCHED_NUMBER_COLOR)
+  sketched_chip_9_surf = sketched_chip_font.render('9', 0, SKETCHED_NUMBER_COLOR)
+
+  if event.type == pygame.KEYDOWN:
+    if board[row][col] == 1:
+      sketched_chip_1_rect = sketched_chip_1_surf.get_rect(center=(col * CELL_SIZE + CELL_SIZE // 4, row * CELL_SIZE + CELL_SIZE // 3))
+      screen.blit(sketched_chip_1_surf, sketched_chip_1_rect)
+    elif board[row][col] == 2:
+      sketched_chip_2_rect = sketched_chip_2_surf.get_rect(center=(col * CELL_SIZE + CELL_SIZE // 4, row * CELL_SIZE + CELL_SIZE // 3))
+      screen.blit(sketched_chip_2_surf, sketched_chip_2_rect)
+    elif board[row][col] == 3:
+      sketched_chip_3_rect = sketched_chip_3_surf.get_rect(center=(col * CELL_SIZE + CELL_SIZE // 4, row * CELL_SIZE + CELL_SIZE // 3))
+      screen.blit(sketched_chip_3_surf, sketched_chip_3_rect)
+    elif board[row][col] == 4:
+      sketched_chip_4_rect = sketched_chip_4_surf.get_rect(center=(col * CELL_SIZE + CELL_SIZE // 4, row * CELL_SIZE + CELL_SIZE // 3))
+      screen.blit(sketched_chip_4_surf, sketched_chip_4_rect)
+    elif board[row][col] == 5:
+      sketched_chip_5_rect = sketched_chip_5_surf.get_rect(center=(col * CELL_SIZE + CELL_SIZE // 4, row * CELL_SIZE + CELL_SIZE // 3))
+      screen.blit(sketched_chip_5_surf, sketched_chip_5_rect)
+    elif board[row][col] == 6:
+      sketched_chip_6_rect = sketched_chip_6_surf.get_rect(center=(col * CELL_SIZE + CELL_SIZE // 4, row * CELL_SIZE + CELL_SIZE // 3))
+      screen.blit(sketched_chip_6_surf, sketched_chip_6_rect)
+    elif board[row][col] == 7:
+      sketched_chip_7_rect = sketched_chip_7_surf.get_rect(center=(col * CELL_SIZE + CELL_SIZE // 4, row * CELL_SIZE + CELL_SIZE // 3))
+      screen.blit(sketched_chip_7_surf, sketched_chip_7_rect)
+    elif board[row][col] == 8:
+      sketched_chip_8_rect = sketched_chip_8_surf.get_rect(center=(col * CELL_SIZE + CELL_SIZE // 4, row * CELL_SIZE + CELL_SIZE // 3))
+      screen.blit(sketched_chip_8_surf, sketched_chip_8_rect)
+    elif board[row][col] == 9:
+      sketched_chip_9_rect = sketched_chip_9_surf.get_rect(center=(col * CELL_SIZE + CELL_SIZE // 4, row * CELL_SIZE + CELL_SIZE // 3))
+      screen.blit(sketched_chip_9_surf, sketched_chip_9_rect)
+
 
 def draw_chips():
   #represents each chip's surface
@@ -133,7 +177,7 @@ def draw_chips():
   for row in range(CELL_ROWS): #go through the rows first....
     for col in range(CELL_COLS): #then in each row, we want to look at the col...
       
-       if board[row][col] == 1: #seeing if the specific cell is equal to 1
+      if board[row][col] == 1: #seeing if the specific cell is equal to 1
         chip_1_rect = chip_1_surf.get_rect(center=(col* CELL_SIZE + CELL_SIZE // 2, row * CELL_SIZE + CELL_SIZE // 2))
         screen.blit(chip_1_surf, chip_1_rect) #draws numbers on cell/board ---> (surface is first, rect is second)
         
@@ -298,50 +342,73 @@ while True:
 
     #Press a number on the keyboard
     #number will appear on board. K_# doesnt include numberpad, K_KP# is for pressing # on the number pad.
-        if event.type == pygame.KEYDOWN:
+    if event.type == pygame.KEYDOWN:
       if event.key == pygame.K_1:
         board[row][col] = 1
+        draw_chips()
       elif event.key == pygame.K_2:
         board[row][col] = 2
+        draw_sketched_chips()
       elif event.key == pygame.K_3:
         board[row][col] = 3
+        draw_sketched_chips()
       elif event.key == pygame.K_4:
         board[row][col] = 4
+        draw_sketched_chips()
       elif event.key == pygame.K_5:
         board[row][col] = 5
+        draw_sketched_chips()
       elif event.key == pygame.K_6:
         board[row][col] = 6
+        draw_sketched_chips()
       elif event.key == pygame.K_7:
         board[row][col] = 7
+        draw_sketched_chips()
       elif event.key == pygame.K_8:
         board[row][col] = 8
+        draw_sketched_chips()
       elif event.key == pygame.K_9:
         board[row][col] = 9
+        draw_sketched_chips()
         
       else:
         if event.key == pygame.K_KP1:
           board[row][col] = 1
+          draw_chips()
         elif event.key == pygame.K_KP2:
           board[row][col] = 2
+          draw_sketched_chips()
         elif event.key == pygame.K_KP3:
           board[row][col] = 3
+          draw_sketched_chips()
         elif event.key == pygame.K_KP4:
           board[row][col] = 4
+          draw_sketched_chips()
         elif event.key == pygame.K_KP5:
           board[row][col] = 5
+          draw_sketched_chips()
         elif event.key == pygame.K_KP6:
           board[row][col] = 6
+          draw_sketched_chips()
         elif event.key == pygame.K_KP7:
           board[row][col] = 7
+          draw_sketched_chips()
         elif event.key == pygame.K_KP8:
           board[row][col] = 8
+          draw_sketched_chips()
         elif event.key == pygame.K_KP9:
           board[row][col] = 9
+          draw_sketched_chips()
+
+    if event.type == pygame.KEYDOWN:
+      if event.key == pygame.K_KP_ENTER:
+        if board[row][col] == 1:
+          draw_chips()
+
 
     #prints number using draw_chips()
     #error: number can be paced on top of each other if the same cell box is selected
     #problem: code didnt work when I did an 'or statement', such as == (pygame.K_KP1) or (pygame.K_1)
-    draw_chips() 
-  
+
   pygame.display.update() # Needs to be at the end of the event For Loop! Updates the Window Screen at the end of loop.     
 pass

@@ -9,6 +9,8 @@ SPACE = 55
 
 BG_COLOR = (255, 255, 245)
 LINE_COLOR = (66, 66, 66) # Changed line color to black based on CROSS_COLOR
+NUMBER_COLOR = (66, 66, 66) # Added number color constant
+SKETCHED_NUMBER_COLOR = (128, 128, 128) # Added sketched number color constant
 
 CHIP_FONT = 400
 GAME_OVER_FONT = 40

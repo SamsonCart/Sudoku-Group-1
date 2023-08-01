@@ -24,13 +24,11 @@ LINE_COLOR_BLACK = (33, 33, 33) #color black
 LINE_COLOR_GRAY = (119, 122, 122) #color gray
 CIRCLE_COLOR = (155, 155, 155)
 NUMBER_COLOR = (66, 66, 66) #changed from CROSS_COLOR
-
-
-
-
+SKETCHED_NUMBER_COLOR = (128, 128, 128) # Added sketched number color constant
 
 
 CHIP_FONT = 100 #decrease size from 400px to 100px
+SKETCHED_CHIP_FONT = 65
 
 
 
