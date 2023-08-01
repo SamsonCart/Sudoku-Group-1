@@ -298,45 +298,45 @@ while True:
 
     #Press a number on the keyboard
     #number will appear on board. K_# doesnt include numberpad, K_KP# is for pressing # on the number pad.
-    if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN:
       if event.key == pygame.K_1:
-        board[row][col] = '1'
+        board[row][col] = 1
       elif event.key == pygame.K_2:
-        board[row][col] = '2'
+        board[row][col] = 2
       elif event.key == pygame.K_3:
-        board[row][col] = '3'
+        board[row][col] = 3
       elif event.key == pygame.K_4:
-        board[row][col] = '4'
+        board[row][col] = 4
       elif event.key == pygame.K_5:
-        board[row][col] = '5'
+        board[row][col] = 5
       elif event.key == pygame.K_6:
-        board[row][col] = '6'
+        board[row][col] = 6
       elif event.key == pygame.K_7:
-        board[row][col] = '7'
+        board[row][col] = 7
       elif event.key == pygame.K_8:
-        board[row][col] = '8'
+        board[row][col] = 8
       elif event.key == pygame.K_9:
-        board[row][col] = '9'
+        board[row][col] = 9
         
       else:
         if event.key == pygame.K_KP1:
-          board[row][col] = '1'
+          board[row][col] = 1
         elif event.key == pygame.K_KP2:
-          board[row][col] = '2'
+          board[row][col] = 2
         elif event.key == pygame.K_KP3:
-          board[row][col] = '3'
+          board[row][col] = 3
         elif event.key == pygame.K_KP4:
-          board[row][col] = '4'
+          board[row][col] = 4
         elif event.key == pygame.K_KP5:
-          board[row][col] = '5'
+          board[row][col] = 5
         elif event.key == pygame.K_KP6:
-          board[row][col] = '6'
+          board[row][col] = 6
         elif event.key == pygame.K_KP7:
-          board[row][col] = '7'
+          board[row][col] = 7
         elif event.key == pygame.K_KP8:
-          board[row][col] = '8'
-        elif event.key ==  pygame.K_KP9:
-          board[row][col] = '9'
+          board[row][col] = 8
+        elif event.key == pygame.K_KP9:
+          board[row][col] = 9
 
     #prints number using draw_chips()
     #error: number can be paced on top of each other if the same cell box is selected
