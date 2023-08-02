@@ -1,14 +1,16 @@
 """
 This class represents a Sudoku board object. A Sudoku board contains 81 cells.
+
 Authors: Samson Carter, Chance Nahuway, Dylan Dixon, Diamond Nicholas
 Project 4, Group 1
 UF COP 3502C in Summer 2023.
 """
 
 
-import cell
+from cell import *
+from sudoku_generator import *
 from constants import *
-
+import pygame
 
 
 class Board:
@@ -21,7 +23,12 @@ class Board:
         self.screen = screen
         self.difficulty = difficulty
         self.selected_cell = selected_cell
-        self.board = ["", "", "", "", "", "", "", "", ""] * 9
+        if difficulty == "easy":
+            self.board = generate_sudoku(9, 30)
+        elif difficulty == "medium":
+            self.board = generate_sudoku(9, 40)
+        elif difficulty == "hard":
+            self.board = generate_sudoku(9, 50)
     """
     Draws an outline of the Sudoku grid, with bold lines to delineate the 3 x 3 board boxes and with lighter lines to delineate the 9 x 9 ceel boxes
     Draws every cell on the board
