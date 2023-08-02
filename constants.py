@@ -1,5 +1,5 @@
 WIDTH = 900 # adjusted width and height from 600 to 900 for easier math
-HEIGHT = 1000
+HEIGHT = 1000                                                                   #checking to see if I upload this to github right!
 LINE_WIDTH = 10 # reduced line width to 10 for easier distinction between main and secondary lines
 MAIN_LINE_WIDTH = 20 # Changed named from Win_Line_Width to Main_Line_Width and increased to 20 for a larger board
 WIN_LINE_WIDTH = 15
