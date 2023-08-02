@@ -26,14 +26,13 @@ class Board:
         self.difficulty = difficulty
         self.selected_cell = None
         if difficulty == "easy":
-            self.board = generate_sudoku(9, 30)
+            self.original_board = generate_sudoku(9, 30)
         elif difficulty == "medium":
-            self.board = generate_sudoku(9, 40)
+            self.original_board = generate_sudoku(9, 40)
         elif difficulty == "hard":
-            self.board = generate_sudoku(9, 50)
-        self.original_board = self.board.copy()
+            self.original_board = generate_sudoku(9, 50)
         self.cells = [
-            [Cell(self.board[i][j], i, j, screen) for j in range(cols)]
+            [Cell(self.original_board[i][j], i, j, screen) for j in range(cols)]
             for i in range(rows)
         ]
 
@@ -43,6 +42,7 @@ class Board:
     Draws every cell on the board.
     """
     def draw(self):
+        # FIXME
         # draw horizontal lines
         for i in range(1, BOARD_ROWS):
             if i % 3 == 0:  # if i %3 is 0 then it's at place 0, 3, 6 and 9, the spots for bold lines
@@ -134,26 +134,20 @@ class Board:
     Returns a Boolean value indicating whether the board is full or not. 
     """
     def is_full(self):
-        for row in self.board:
-            for number in row:
-                if number == 0:   # 0 represents empty spaces
-                    return False  # means the board is not full yet
-        return True  # True when board completely full.
+        for cell in self.cells:
+            if cell.value == 0:
+                return False
+        return True
 
     """
     Reset all cells in the board to their original values 
     (0 if cleared, otherwise the corresponding digit).
     """
     def reset_to_original(self):
-        self.board = self.original_board
-    
-    """
-    Updates the underlying 2D board with the values in all cells.
-    """
-    def update_board(self):
-        for cell in self.board:
-            if cell.value != cell.sketched_value:
-                cell.value = cell.sketched_value
+        self.cells = [
+            [Cell(self.original_board[i][j], i, j, screen) for j in range(cols)]
+            for i in range(rows)
+        ]
 
     """
     Find an empty cell and returns it's row and col as a tuple (x,y)
@@ -172,6 +166,7 @@ class Board:
     Checks whether the Sudoku board is solved correctly.
     """
     def check_board(self):
+        # FIXME
         # board is solved correctly if each digit (1-9) only appear once in every row/col
         for row in range(9):
             if self.board[row][0] != self.board[row][1] != self.board[row][2] != self.board[row][3] != self.board[row][4] != self.board[row][5] != self.board[row][6] != self.board[row][7] != self.board[row][8]:
