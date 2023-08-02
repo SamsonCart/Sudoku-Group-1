@@ -25,10 +25,12 @@ class Cell:
             self.is_editable = False
 
     def set_cell_value(self, value):
-        self.value = value
+        if self.is_editable == True:
+            self.value = value
 
     def set_sketched_value(self, value):
-        self.sketched_value = value
+        if self.is_editable == True:
+            self.sketched_value = value
 
     def draw(self, screen):
         num_font = pygame.font.Font(None, NUMBER_FONT)
