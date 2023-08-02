@@ -164,14 +164,14 @@ class Board:
         ]
 
     """
-    Find an empty cell and returns it's row and col as a tuple (x,y)
+    Find an empty cell and returns its row and col as a tuple (x,y)
     """
     def find_empty(self):
         for i in range(self.rows):
             for cell in self.cells[i]:
                 if cell.value == 0:
                     return cell.row, cell.col
-            return None
+        return None
         
     """
     Checks whether the Sudoku board is solved correctly by checking row, column, and box sums.
