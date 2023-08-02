@@ -23,7 +23,7 @@ class Board:
         self.selected_cell = selected_cell
         self.board = ["", "", "", "", "", "", "", "", ""] * 9
     """
-    Draws an outline of the Sudoku grid, with bold lines to delineate the 3 x 3 boxes.
+    Draws an outline of the Sudoku grid, with bold lines to delineate the 3 x 3 board boxes and with lighter lines to delineate the 9 x 9 ceel boxes
     Draws every cell on the board
     """
     def draw(self):
@@ -40,7 +40,7 @@ class Board:
             else: # else, print normal line width
                 pygame.draw.line(
                     screen,
-                    LINE_COLOR,
+                    LINE_COLOR_GRAY,  #originally LINE_COLOR (color black), made it gray for the player to easily tell board/cell grids apart
                     (0, i * SQUARE_SIZE),
                     (WIDTH, i * SQUARE_SIZE),
                     LINE_WIDTH
@@ -52,13 +52,13 @@ class Board:
                     screen,
                     LINE_COLOR,
                     (i * SQUARE_SIZE, 0),
-                    (i * SQUARE_SIZE, HEIGHT),
+                    (i * SQUARE_SIZE, HEIGHT), 
                     MAIN_LINE_WIDTH
                 )
             else:   
                 pygame.draw.line(
                     screen,
-                    LINE_COLOR,
+                    LINE_COLOR_GRAY, #originally LINE_COLOR (color black)
                     (i * SQUARE_SIZE, 0),
                     (i * SQUARE_SIZE, HEIGHT),
                     LINE_WIDTH
@@ -69,13 +69,11 @@ class Board:
     A Board object has 81 Cell objects. ---> 9 x 9 
     '''
     def select(self, row, col):
-        #row_num = row ... not sure we need to assign row and col.
-        #col_num = col
-      
-        selected_cell = self.board[row][col]
-
-        #Once a cell has been selected, the user can edit its value or sketched value. 
-        return selected_cell
+      row_index = row
+      col_index = col
+        
+      self.selected_cell = self.board[row_index][col_index] #looks at the clicked cell box on the grid board.
+      return self.selected_cell #Once a cell box has been selected, the user can either edit user-entered value or sketched value. 
 
     """
     If a tuple of (x,y) coordinates is within the displayed board,
@@ -108,11 +106,13 @@ class Board:
     Sets the sketched value of the current selected cell equal to user entered value.
     It will be displayed at the top left corner of the cell using the draw() function. 
     '''
-    def sketch(self,value):
-        #I think value might be a digit 1-9(?) entered by user.
-        self.selected_cell = value
-        return self.selected.cell
-        # draw the new value(?)
+    def sketch(self, value):
+      if self.selected_cell != None:  #must select a cell box first
+        if int(value) in range(1,10): #value needs to be a user-entered value (1-9).
+          sketched_value = value
+          return sketched_value #returns value to sketch
+      else:
+        return None #returns nothing to sketch
 
     """
     Sets the value of the current selected cell equal to user-entered
@@ -121,7 +121,6 @@ class Board:
     def place_number(self, value):
         if selected_cell is not None:
             selected_cell.set_cell_value(value)
-
 
     '''
     Returns a Boolean value indicating whether the board is full or not. 
@@ -138,7 +137,7 @@ class Board:
             return False
         else:
             return True
-        '''
+        ''' 
         for row in self.board:
             for number in row:
                 if number == 0:   #0 represents empty spaces
@@ -179,11 +178,11 @@ class Board:
     def check_board(self):
       #board is solved correctly if each digit (1-9) only appear once in every row/col
       for row in range(9):
-        if self.board[row][0] != self.board[row][1] != self.board[row][2] != self.board[row][3] != self.board[row][4] != self.board[row][5] != self.board[row][6] != self.board[row][7] != self.board[row][8]
+        if self.board[row][0] != self.board[row][1] != self.board[row][2] != self.board[row][3] != self.board[row][4] != self.board[row][5] != self.board[row][6] != self.board[row][7] != self.board[row][8]:  #added ':' at end
             return True #solved correctly
           
       for col in range(9):
-        if self.board[0][col] != self.board[1][col] != self.board[2][col] != self.board[3][col] != self.board[4][col] != self.board[5][col] != self.board[6][col] != self.board[7][col] != self.board[8][col]
+        if self.board[0][col] != self.board[1][col] != self.board[2][col] != self.board[3][col] != self.board[4][col] != self.board[5][col] != self.board[6][col] != self.board[7][col] != self.board[8][col]: #added ':' at end
             return True #solved correctly
 
       return False #not solved correctly
