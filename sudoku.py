@@ -80,8 +80,8 @@ def draw_game_start(screen):
           return "hard" # return hard removed cells value
     pygame.display.update()
 
-
-
-
 difficulty = draw_game_start(screen)
 screen.fill(BG_COLOR_IN_GAME)  # Screen represents window screen(predetermined width and height from constants.py)
+
+game_board = Board(BOARD_ROWS, BOARD_COLS, WIDTH, HEIGHT, screen, difficulty) # creates a Board object
+Board.draw(game_board)
