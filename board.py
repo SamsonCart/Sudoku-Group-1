@@ -37,6 +37,18 @@ class Board:
         ]
 
     """
+    Returns 2D list containing underlying cell values. Mainly for debugging purposes.
+    """
+    def get_board_list(self):
+        result = []
+        for i in range(self.rows):
+            row = []
+            for j in range(self.cols):
+                row.append(self.cells[i][j].value)
+            result.append(row)
+        return result
+
+    """
     Draws an outline of the Sudoku grid, with bold lines to delineate the 3 x 3 board boxes.
     Lighter lines delineate the 9 x 9 cell boxes.
     Draws every cell on the board.
