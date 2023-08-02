@@ -53,7 +53,48 @@ class Board:
     Lighter lines delineate the 9 x 9 cell boxes.
     Draws every cell on the board.
     """
-    def draw(self):
+
+    '''
+    Draw_grid function draws the grid for the game board and is called into the board
+    draw(self)'''
+
+    def draw_grid(self):
+        #draw top boarder
+        pygame.draw.line(
+            self.screen,
+            LINE_COLOR,
+            (0, 0),
+            (BOARD_ROWS * SQUARE_SIZE, 0),
+            MAIN_LINE_WIDTH
+             )
+
+        # draw right boarder
+        pygame.draw.line(
+            self.screen,
+            LINE_COLOR,
+            (BOARD_ROWS * SQUARE_SIZE, 0),
+            (BOARD_ROWS * SQUARE_SIZE, BOARD_ROWS * SQUARE_SIZE),
+            MAIN_LINE_WIDTH
+        )
+
+        # draw left boarder
+        pygame.draw.line(
+            self.screen,
+            LINE_COLOR,
+            (0, 0),
+            (0, BOARD_COLS * SQUARE_SIZE),
+            MAIN_LINE_WIDTH
+        )
+
+        # draw bottom boarder
+        pygame.draw.line(
+            self.screen,
+            LINE_COLOR,
+            (0, BOARD_COLS * SQUARE_SIZE),
+            (BOARD_COLS * SQUARE_SIZE, BOARD_COLS * SQUARE_SIZE),
+            MAIN_LINE_WIDTH
+        )
+
         # draw horizontal lines
         for i in range(1, BOARD_ROWS + 1):
             if i % 3 == 0:  # if i %3 is 0 then it's at place 0, 3, 6 and 9, the spots for bold lines
@@ -82,7 +123,7 @@ class Board:
                     (i * SQUARE_SIZE, HEIGHT - 100),
                     MAIN_LINE_WIDTH
                 )
-            else:   
+            else:
                 pygame.draw.line(
                     self.screen,
                     LINE_COLOR_GRAY,  # originally LINE_COLOR (color black)
@@ -90,6 +131,11 @@ class Board:
                     (i * SQUARE_SIZE, HEIGHT - 100),
                     LINE_WIDTH
                 )
+
+
+    def draw(self):
+        # draws the grid
+        self.draw_grid()
 
             # draw the cells
         for i in range(self.rows):
@@ -101,6 +147,7 @@ class Board:
     Marks the cell at (row, col) in the board as the current selected cell.
     """
     def select(self, row, col, screen):
+        self.draw_grid()
         for i in range(self.rows):
             for cell in self.cells[i]:
                 if cell.is_selected:
