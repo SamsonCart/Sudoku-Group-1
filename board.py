@@ -31,7 +31,6 @@ class Board:
             self.original_board = generate_sudoku(9, 40)
         elif difficulty == "hard":
             self.original_board = generate_sudoku(9, 50)
-        # FIXME (SHOULD WE MAKE THIS A 1D LIST OR SHOULD WE UPDATE LOOP LOGIC IN METHODS BELOW?)
         self.cells = [
             [Cell(self.original_board[i][j], i, j, screen) for j in range(cols)]
             for i in range(rows)
@@ -43,7 +42,7 @@ class Board:
     Draws every cell on the board.
     """
     def draw(self):
-        # FIXME (HAVE NOT TOUCHED THIS)
+        # FIXME (HAVE NOT TOUCHED THIS METHOD AT ALL)
         # draw horizontal lines
         for i in range(1, BOARD_ROWS):
             if i % 3 == 0:  # if i %3 is 0 then it's at place 0, 3, 6 and 9, the spots for bold lines
@@ -119,7 +118,7 @@ class Board:
     """
     def sketch(self, sketched_value):
         if self.selected_cell is not None and self.selected_cell.is_editable:
-            if sketched_value in range(1, 10):
+            if sketched_value in range(1, self.rows + 1):
                 self.selected_cell.sketched_value = sketched_value
 
     """
@@ -128,18 +127,18 @@ class Board:
     """
     def place_number(self, value):
         if self.selected_cell is not None and self.selected_cell.is_editable:
-            if value in range(1, 10):
+            if value in range(1, self.rows + 1):
                 self.selected_cell.value = value
 
     """
     Returns a Boolean value indicating whether the board is full or not. 
     """
     def is_full(self):
-        # FIXME (NEED TO FIX ATTRIBUTE REFERENCE ISSUE)
-        for cell in self.cells:
-            if cell.value == 0:
-                return False
-        return True
+        for i in range(self.rows):
+            for cell in self.cells[i]:
+                if cell.value == 0:
+                    return False
+            return True
 
     """
     Reset all cells in the board to their original values 
@@ -155,24 +154,34 @@ class Board:
     Find an empty cell and returns it's row and col as a tuple (x,y)
     """
     def find_empty(self):
-        # FIXME (NEED TO FIX ATTRIBUTE REFERENCE ISSUE)
-        for cell in self.cells:
-            if cell.value == 0:
-                return cell.row, cell.col
-        return None
+        for i in range(self.rows):
+            for cell in self.cells[i]:
+                if cell.value == 0:
+                    return cell.row, cell.col
+            return None
         
     """
     Checks whether the Sudoku board is solved correctly.
     """
     def check_board(self):
-        # FIXME (HAVE NOT TOUCHED THIS)
-        # board is solved correctly if each digit (1-9) only appear once in every row/col
-        for row in range(9):
-            if self.board[row][0] != self.board[row][1] != self.board[row][2] != self.board[row][3] != self.board[row][4] != self.board[row][5] != self.board[row][6] != self.board[row][7] != self.board[row][8]:
-                return True  # solved correctly
+        # check that row sum is equal to n * (n + 1) / 2 for all n rows
+        for i in range(self.rows):
+            row_sum = 0
+            for j in range(self.cols):
+                row_sum += self.cells[i][j].value
+            if row_sum != self.rows * (self.rows + 1) / 2:
+                return False
 
-        for col in range(9):
-            if self.board[0][col] != self.board[1][col] != self.board[2][col] != self.board[3][col] != self.board[4][col] != self.board[5][col] != self.board[6][col] != self.board[7][col] != self.board[8][col]:
-                return True  # solved correctly
+        # check that column sum is equal to n * (n + 1) / 2 for all n columns
+        for j in range(self.rows):
+            col_sum = 0
+            for i in range(self.cols):
+                col_sum += self.cells[i][j].value
+            print(col_sum)
+            if col_sum != self.cols * (self.cols + 1) / 2:
+                return False
 
-        return False  # not solved correctly
+        # check that box sum is equal to n * (n + 1) / 2 for all n boxes
+        # FIXME (NEED TO WRITE THIS PORTION OF THE METHOD)
+
+        return True
