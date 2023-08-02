@@ -30,17 +30,9 @@ class SudokuGenerator:
         self.row_length = row_length
         self.box_length = int(row_length ** 0.5)
         self.removed_cells = removed_cells
-        self.board = [
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0]
-        ]
+        self.board = []
+        for i in range(row_length):
+            self.board.append([0] * row_length)
 
     '''
     Returns a 2D python list of numbers which represents the board.
@@ -90,7 +82,7 @@ class SudokuGenerator:
     '''
     def valid_in_col(self, col, num):
         col_list = []
-        for cell in range(9):
+        for cell in range(self.row_length):
             col_list.append(self.board[cell][col])
         if num in col_list:
             return False
@@ -142,7 +134,9 @@ class SudokuGenerator:
         None
     '''
     def fill_box(self, row_start, col_start):
-        unused_in_box = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        unused_in_box = []
+        for i in range(1, self.row_length + 1):
+            unused_in_box.append(i)
         for i in (row_start, row_start + 1, row_start + 2):
             for j in (col_start, col_start + 1, col_start + 2):
                 choice = random.choice(unused_in_box)
@@ -224,7 +218,7 @@ class SudokuGenerator:
         already_removed = []
         num_removed = 0
         while num_removed < self.removed_cells:
-            (x, y) = (random.randrange(0, 9), random.randrange(0, 9))
+            (x, y) = (random.randrange(0, self.row_length), random.randrange(0, self.row_length))
             if (x, y) not in already_removed:
                 self.board[x][y] = 0
                 already_removed.append((x, y))
@@ -240,7 +234,7 @@ Given a number of rows and number of cells to remove, this function:
     3. removes the appropriate number of cells
     4. returns the representative 2D Python Lists of the board and solution
 Parameters:
-    size is the number of rows/columns of the board (9 for this project)
+    size is the number of rows/columns of the board (always 9 for this project)
     removed is the number of cells to clear (set to 0)
 Return:
     list[list] (a 2D Python list to represent the board)
