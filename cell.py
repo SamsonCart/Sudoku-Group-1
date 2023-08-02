@@ -18,7 +18,11 @@ class Cell:
         self.col = col
         self.screen = screen
         self.sketched_value = 0
-        self.selected = False
+        self.is_selected = False
+        if self.value == 0:
+            self.is_editable = True
+        else:
+            self.is_editable = False
 
     def set_cell_value(self, value):
         self.value = value
@@ -133,7 +137,7 @@ class Cell:
                 center=(self.col * SQUARE_SIZE + SQUARE_SIZE // 2, self.row * SQUARE_SIZE + SQUARE_SIZE // 2))
             screen.blit(sketched_cell_blank_surf, sketched_cell_blank_rect)
 
-        if self.selected is True:
+        if self.is_selected is True:
             for i in range(self.col, self.col + 2):
                 pygame.draw.line(self.screen, SELECTED_COLOR, (self.row * SQUARE_SIZE, i * SQUARE_SIZE),
                                  ((self.row + 1) * SQUARE_SIZE, i * SQUARE_SIZE), LINE_WIDTH)
