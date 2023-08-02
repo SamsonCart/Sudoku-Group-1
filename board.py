@@ -42,7 +42,7 @@ class Board:
     Draws every cell on the board.
     """
     def draw(self):
-        # FIXME
+        # FIXME (HAVE NOT TOUCHED THIS)
         # draw horizontal lines
         for i in range(1, BOARD_ROWS):
             if i % 3 == 0:  # if i %3 is 0 then it's at place 0, 3, 6 and 9, the spots for bold lines
@@ -134,6 +134,7 @@ class Board:
     Returns a Boolean value indicating whether the board is full or not. 
     """
     def is_full(self):
+        # FIXME (NEED TO FIX ATTRIBUTE REFERENCE ISSUE)
         for cell in self.cells:
             if cell.value == 0:
                 return False
@@ -145,28 +146,25 @@ class Board:
     """
     def reset_to_original(self):
         self.cells = [
-            [Cell(self.original_board[i][j], i, j, screen) for j in range(cols)]
-            for i in range(rows)
+            [Cell(self.original_board[i][j], i, j, self.screen) for j in range(self.cols)]
+            for i in range(self.rows)
         ]
 
     """
     Find an empty cell and returns it's row and col as a tuple (x,y)
     """
     def find_empty(self):
-        # FIXME
-        for i in range(9):
-            for j in range(9):
-                if self.board[i][j] == 0:
-                    return_tuple = (i, j)
-                    return return_tuple
-                else:
-                    return None
+        # FIXME (NEED TO FIX ATTRIBUTE REFERENCE ISSUE)
+        for cell in self.cells:
+            if cell.value == 0:
+                return cell.row, cell.col
+        return None
         
     """
     Checks whether the Sudoku board is solved correctly.
     """
     def check_board(self):
-        # FIXME
+        # FIXME (HAVE NOT TOUCHED THIS)
         # board is solved correctly if each digit (1-9) only appear once in every row/col
         for row in range(9):
             if self.board[row][0] != self.board[row][1] != self.board[row][2] != self.board[row][3] != self.board[row][4] != self.board[row][5] != self.board[row][6] != self.board[row][7] != self.board[row][8]:
