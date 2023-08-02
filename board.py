@@ -157,6 +157,7 @@ class Board:
     (0 if cleared, otherwise the corresponding digit).
     """
     def reset_to_original(self):
+        self.selected_cell = None
         self.cells = [
             [Cell(self.original_board[i][j], i, j, self.screen) for j in range(self.cols)]
             for i in range(self.rows)
@@ -173,27 +174,37 @@ class Board:
             return None
         
     """
-    Checks whether the Sudoku board is solved correctly.
+    Checks whether the Sudoku board is solved correctly by checking row, column, and box sums.
     """
     def check_board(self):
-        # check that row sum is equal to n * (n + 1) / 2 for all n rows
+        # check that row sum is equal to 45 for all 9 rows
         for i in range(self.rows):
             row_sum = 0
             for j in range(self.cols):
                 row_sum += self.cells[i][j].value
-            if row_sum != self.rows * (self.rows + 1) / 2:
+            if row_sum != 45:
                 return False
 
-        # check that column sum is equal to n * (n + 1) / 2 for all n columns
+        # check that column sum is equal to 45 for all 9 columns
         for j in range(self.rows):
             col_sum = 0
             for i in range(self.cols):
                 col_sum += self.cells[i][j].value
-            print(col_sum)
-            if col_sum != self.cols * (self.cols + 1) / 2:
+            if col_sum != 45:
                 return False
 
-        # check that box sum is equal to n * (n + 1) / 2 for all n boxes
-        # FIXME (NEED TO WRITE THIS PORTION OF THE METHOD)
+        # check that box sum is equal to 45 for all 9 boxes
+        for (row_start, col_start) in [(0 ,0), (0, 3), (0, 6), (3, 0), (3, 0), (3, 3), (3, 6), (6, 0), (6, 3), (6, 6)]:
+            box_sum = 0
+            for i in [0, 1, 2]:
+                for j in [0, 1, 2]:
+                    box_sum += self.cells[row_start + i][col_start + j].value
+                    print(self.cells[row_start + i][col_start + j].value)
+            if box_sum != 45:
+                return False
 
         return True
+
+test_board = Board(9, 9, 900, 1000, -1, "easy")
+print(test_board.get_board_list())
+test_board.check_board()
