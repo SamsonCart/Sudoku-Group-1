@@ -101,12 +101,13 @@ class Board:
     Marks the cell at (row, col) in the board as the current selected cell.
     """
     def select(self, row, col, screen):
-        for cell in self.cells:
-            if cell.is_selected:
-                cell.is_selected = False
+        for i in range(self.rows):
+            for cell in self.cells[i]:
+                if cell.is_selected:
+                    cell.is_selected = False
         self.selected_cell = self.cells[row][col]
         self.selected_cell.is_selected = True
-        if self.selected_cell.is_selected == True:
+        if self.selected_cell.is_selected:
 
             for i in range(row, row + 2):  # range for x parameters
                 pygame.draw.line(
@@ -137,6 +138,8 @@ class Board:
         else:
             row = x // (self.width / self.rows)
             col = y // ((self.height - 100) / self.rows)
+            row = int(row)
+            col = int(col)
             return row, col
 
     """
