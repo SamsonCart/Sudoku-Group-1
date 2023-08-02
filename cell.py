@@ -25,11 +25,11 @@ class Cell:
             self.is_editable = False
 
     def set_cell_value(self, value):
-        if self.is_editable == True:
+        if self.is_editable:
             self.value = value
 
     def set_sketched_value(self, value):
-        if self.is_editable == True:
+        if self.is_editable:
             self.sketched_value = value
 
     def draw(self, screen):
