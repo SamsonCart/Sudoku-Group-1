@@ -6,9 +6,10 @@ Project 4, Group 1
 UF COP 3502C in Summer 2023.
 """
 
-import pygame
+import pygame, sys
 from constants import *
 from board import Board
+from cell import Cell
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT)) #set width and height of board
@@ -80,8 +81,26 @@ def draw_game_start(screen):
           return "hard" # return hard removed cells value
     pygame.display.update()
 
+
+
+
 difficulty = draw_game_start(screen)
 screen.fill(BG_COLOR_IN_GAME)  # Screen represents window screen(predetermined width and height from constants.py)
 
-game_board = Board(BOARD_ROWS, BOARD_COLS, WIDTH, HEIGHT, screen, difficulty) # creates a Board object
+game_board = Board(BOARD_ROWS, BOARD_COLS, WIDTH, HEIGHT, screen, difficulty)
 Board.draw(game_board)
+
+while True:
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~EVENT LOOP STARTS HERE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  for event in pygame.event.get():
+
+    # -----------CLOSE WINDOW OPTION HERE ------------------
+    if event.type == pygame.QUIT:
+      pygame.quit()
+      sys.exit()
+    # ------MOUSECLICK HERE---------------------
+    if event.type == pygame.MOUSEBUTTONDOWN:
+      x, y = event.pos
+      row, col = game_board.click(game_board, x, y) #click method
+      game_board.select(game_board, row, col, screen) # select method
