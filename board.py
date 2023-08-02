@@ -204,7 +204,3 @@ class Board:
                 return False
 
         return True
-
-test_board = Board(9, 9, 900, 1000, -1, "easy")
-print(test_board.get_board_list())
-test_board.check_board()
