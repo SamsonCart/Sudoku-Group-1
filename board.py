@@ -15,7 +15,7 @@ from constants import *
 
 class Board:
     """
-    Initializes a new Sudoku board object containing 81 cell objects.
+    Initializes a new Sudoku board object containing underlying cell objects.
     """
     def __init__(self, rows, cols, width, height, screen, difficulty):
         self.rows = rows
@@ -82,13 +82,13 @@ class Board:
     
     """
     Marks the cell at (row, col) in the board as the current selected cell.
-    A Board object has 81 Cell objects. ---> 9 x 9 
     """
     def select(self, row, col):
-        row_index = row
-        col_index = col
-        self.selected_cell = self.board[row_index][col_index]  # looks at the clicked cell box on the grid board.
-        return self.selected_cell  # Once cell is selected, user can either edit user-entered value or sketched value.
+        for cell in self.cells:
+            if cell.is_selected:
+                cell.is_selected = False
+        self.selected_cell = self.cells[row][col]
+        self.selected_cell.is_selected = True
 
     """
     If a tuple of (x,y) coordinates is within the displayed board,
@@ -99,41 +99,36 @@ class Board:
         if x < 0 or y < 0 or x > self.width or y > self.height:
             return None
         else:
-            row = x // (self.width / 9)
-            col = y // (self.height / 9)
+            row = x // (self.width / self.rows)
+            col = y // ((self.height - 100) / self.rows)
             return row, col
 
     """
-    Clears the value cell. Note that the user can only remove the cell values 
+    Clears the selected cell. Note that the user can only remove the cell values 
     and sketched value that are filled by themselves.
     """
     def clear(self):
-        # FIXME
-        # if the cell is an editable cell, then self.value = 0
-        for i in range(9):
-            for j in range(9):
-                if self.board[i][j] is True:
-                    self.board[i][j] = 0
+        if self.selected_cell is not None and self.selected_cell.is_editable:
+            self.selected_cell.value = 0
+            self.selected_cell.sketched_value = 0
 
     """
     Sets the sketched value of the current selected cell equal to user entered value.
     It will be displayed at the top left corner of the cell using the draw() function. 
     """
-    def sketch(self, value):
-        if self.selected_cell is not None:  # must select a cell box first
-            if int(value) in range(1, 10):  # value needs to be a user-entered value (1-9).
-                sketched_value = value
-                return sketched_value  # returns value to sketch
-            else:
-                return None  # returns nothing to sketch
+    def sketch(self, sketched_value):
+        if self.selected_cell is not None and self.selected_cell.is_editable:
+            if sketched_value in range(1, 10):
+                self.selected_cell.sketched_value = sketched_value
 
     """
     Sets the value of the current selected cell equal to user-entered
     value. Called when user presses the Enter key.
     """
     def place_number(self, value):
-        if self.selected_cell is not None:
-            self.selected_cell.set_cell_value(value)
+        if self.selected_cell is not None and self.selected_cell.is_editable:
+            if value in range(1, 10):
+                self.selected_cell.value = value
 
     """
     Returns a Boolean value indicating whether the board is full or not. 
