@@ -31,6 +31,7 @@ class Board:
             self.original_board = generate_sudoku(9, 40)
         elif difficulty == "hard":
             self.original_board = generate_sudoku(9, 50)
+        # FIXME (SHOULD WE MAKE THIS A 1D LIST OR SHOULD WE UPDATE LOOP LOGIC IN METHODS BELOW?)
         self.cells = [
             [Cell(self.original_board[i][j], i, j, screen) for j in range(cols)]
             for i in range(rows)
