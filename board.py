@@ -113,8 +113,8 @@ class Board:
                 pygame.draw.line(
                     screen,
                     SELECTED_COLOR,
-                    (col * SQUARE_SIZE, i * SQUARE_SIZE),
-                    ((col + 1) * SQUARE_SIZE, i * SQUARE_SIZE),
+                    ( i * SQUARE_SIZE, col * SQUARE_SIZE),
+                    (i * SQUARE_SIZE, (col + 1) * SQUARE_SIZE),
                     LINE_WIDTH
                 )
 
@@ -122,8 +122,8 @@ class Board:
                 pygame.draw.line(
                     screen,
                     SELECTED_COLOR,
-                    (i * SQUARE_SIZE, row * SQUARE_SIZE),
-                    (i * SQUARE_SIZE, (row + 1) * SQUARE_SIZE),
+                    (row * SQUARE_SIZE, i * SQUARE_SIZE),
+                    ((row + 1) * SQUARE_SIZE, i * SQUARE_SIZE),
                     LINE_WIDTH
                 )
 
