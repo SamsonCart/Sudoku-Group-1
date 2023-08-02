@@ -7,22 +7,24 @@ UF COP 3502C in Summer 2023.
 """
 
 
+import pygame
 from cell import *
 from sudoku_generator import *
 from constants import *
-import pygame
 
 
 class Board:
     """
-    Initializes a new Sudoku board object.
+    Initializes a new Sudoku board object containing 81 cell objects.
     """
-    def __init__(self, width, height, screen, difficulty, selected_cell):
+    def __init__(self, rows, cols, width, height, screen, difficulty):
+        self.rows = rows
+        self.cols = cols
         self.width = width
         self.height = height
         self.screen = screen
         self.difficulty = difficulty
-        self.selected_cell = selected_cell
+        self.selected_cell = None
         if difficulty == "easy":
             self.board = generate_sudoku(9, 30)
         elif difficulty == "medium":
@@ -30,6 +32,10 @@ class Board:
         elif difficulty == "hard":
             self.board = generate_sudoku(9, 50)
         self.original_board = self.board.copy()
+        self.cells = [
+            [Cell(self.board[i][j], i, j, screen) for j in range(cols)]
+            for i in range(rows)
+        ]
 
     """
     Draws an outline of the Sudoku grid, with bold lines to delineate the 3 x 3 board boxes.
