@@ -1,5 +1,5 @@
 """
-This program generates a Sudoku game.
+This program generates an interactive Sudoku game.
 
 Authors: Samson Carter, Chance Nahuway, Dylan Dixon, Diamond Nicholas
 Project 4, Group 1
