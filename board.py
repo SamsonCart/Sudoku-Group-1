@@ -54,7 +54,6 @@ class Board:
     Draws every cell on the board.
     """
     def draw(self):
-        # FIXME (HAVE NOT TOUCHED THIS METHOD AT ALL)
         # draw horizontal lines
         for i in range(1, BOARD_ROWS + 1):
             if i % 3 == 0:  # if i %3 is 0 then it's at place 0, 3, 6 and 9, the spots for bold lines
@@ -74,13 +73,13 @@ class Board:
                     LINE_WIDTH
                 )
         # draw vertical lines
-        for i in range(1, BOARD_COLS + 1):
+        for i in range(1, BOARD_COLS):
             if i % 3 == 0:
                 pygame.draw.line(
                     self.screen,
                     LINE_COLOR,
                     (i * SQUARE_SIZE, 0),
-                    (i * SQUARE_SIZE, HEIGHT), 
+                    (i * SQUARE_SIZE, HEIGHT - 100),
                     MAIN_LINE_WIDTH
                 )
             else:   
@@ -88,19 +87,44 @@ class Board:
                     self.screen,
                     LINE_COLOR_GRAY,  # originally LINE_COLOR (color black)
                     (i * SQUARE_SIZE, 0),
-                    (i * SQUARE_SIZE, HEIGHT),
+                    (i * SQUARE_SIZE, HEIGHT - 100),
                     LINE_WIDTH
                 )
+
+            # draw the cells
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.cells[i][j].draw() # pulls out each individual cell and runs it
+                                        # through Cell.draw
     
     """
     Marks the cell at (row, col) in the board as the current selected cell.
     """
-    def select(self, row, col):
+    def select(self, row, col, screen):
         for cell in self.cells:
             if cell.is_selected:
                 cell.is_selected = False
         self.selected_cell = self.cells[row][col]
         self.selected_cell.is_selected = True
+        if self.selected_cell.is_selected == True:
+
+            for i in range(row, row + 2):  # range for x parameters
+                pygame.draw.line(
+                    screen,
+                    SELECTED_COLOR,
+                    (col * SQUARE_SIZE, i * SQUARE_SIZE),
+                    ((col + 1) * SQUARE_SIZE, i * SQUARE_SIZE),
+                    LINE_WIDTH
+                )
+
+            for i in range(col, col + 2):  # range for y parameters
+                pygame.draw.line(
+                    screen,
+                    SELECTED_COLOR,
+                    (i * SQUARE_SIZE, row * SQUARE_SIZE),
+                    (i * SQUARE_SIZE, (row + 1) * SQUARE_SIZE),
+                    LINE_WIDTH
+                )
 
     """
     If a tuple of (x,y) coordinates is within the displayed board,
@@ -174,7 +198,8 @@ class Board:
         return None
         
     """
-    Checks whether the Sudoku board is solved correctly by checking row, column, and box sums.
+    Checks whether the Sudoku board is solved correctly by checking row, column, and box sums 
+    as well as ensuring there are no duplicate numbers in each row, column or box.
     """
     def check_board(self):
         # check that row sum is equal to 45 for all 9 rows
@@ -199,7 +224,6 @@ class Board:
             for i in [0, 1, 2]:
                 for j in [0, 1, 2]:
                     box_sum += self.cells[row_start + i][col_start + j].value
-                    print(self.cells[row_start + i][col_start + j].value)
             if box_sum != 45:
                 return False
 
