@@ -56,7 +56,7 @@ class Board:
     def draw(self):
         # FIXME (HAVE NOT TOUCHED THIS METHOD AT ALL)
         # draw horizontal lines
-        for i in range(1, BOARD_ROWS):
+        for i in range(1, BOARD_ROWS + 1):
             if i % 3 == 0:  # if i %3 is 0 then it's at place 0, 3, 6 and 9, the spots for bold lines
                 pygame.draw.line(
                     self.screen,
@@ -74,7 +74,7 @@ class Board:
                     LINE_WIDTH
                 )
         # draw vertical lines
-        for i in range(1, BOARD_COLS):
+        for i in range(1, BOARD_COLS + 1):
             if i % 3 == 0:
                 pygame.draw.line(
                     self.screen,
@@ -203,4 +203,31 @@ class Board:
             if box_sum != 45:
                 return False
 
+        # make a list of values in a given row, compare the list to it's set
+        for i in range(self.rows):
+            row_values = []
+            for j in range(self.cols):
+                row_values.append(self.cells[i][j].value)  # FIXME check syntax
+            if len(row_values) != len(set(row_values)):
+                return False
+
+        # make a list of values in a given col, compare the list to it's set
+        for i in range(self.cols):
+            col_values = []
+            for j in range(self.rows):
+                col_values.append(self.cells[i][j].value)  # FIXME check syntax
+            if len(col_values) != len(set(col_values)):
+                return False
+
+        # make a list of values in a given box, compare the list to it's set
+        for (row_start, col_start) in [(0, 0), (0, 3), (0, 6), (3, 0), (3, 0), (3, 3), (3, 6), (6, 0), (6, 3), (6, 6)]:
+            box_nums = []
+            for i in [0, 1, 2]:
+                for j in [0, 1, 2]:
+                    box_nums.append(self.cells[row_start + i][col_start + j].value)
+            if len(box_nums) != len(set(box_nums)):
+                return False
+
         return True
+
+
