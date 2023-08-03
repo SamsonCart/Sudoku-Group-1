@@ -155,7 +155,6 @@ class Board:
         self.selected_cell = self.cells[row][col]
         self.selected_cell.is_selected = True
         if self.selected_cell.is_selected:
-
             for i in range(row, row + 2):  # range for x parameters
                 pygame.draw.line(
                     screen,
@@ -173,6 +172,7 @@ class Board:
                     ((row + 1) * SQUARE_SIZE, i * SQUARE_SIZE),
                     LINE_WIDTH
                 )
+
 
     """
     If a tuple of (x,y) coordinates is within the displayed board,
@@ -203,9 +203,12 @@ class Board:
     It will be displayed at the top left corner of the cell using the draw() function. 
     """
     def sketch(self, sketched_value):
-        if self.selected_cell is not None and self.selected_cell.is_editable:
-            if sketched_value in range(1, self.rows + 1):
+        #if self.selected_cell is not None and self.selected_cell.is_editable:
+            #if sketched_value in range(1, self.rows + 1):
+                print(f"Sketch {sketched_value}")
                 self.selected_cell.sketched_value = sketched_value
+                print(f'selected cell {self.selected_cell.sketched_value}')
+                self.selected_cell.draw()
 
     """
     Sets the value of the current selected cell equal to user-entered
