@@ -6,10 +6,10 @@ Project 4, Group 1
 UF COP 3502C in Summer 2023.
 """
 
-import pygame, sys
+import pygame
+import sys
 from constants import *
 from board import Board
-from cell import Cell
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))  # set width and height of board
@@ -33,7 +33,7 @@ def draw_game_start(screen):
         center=(WIDTH // 2, HEIGHT // 2 - 150))
     screen.blit(title_surface, title_rectangle)
 
-    # initalize and draw subtitle
+    # initialize and draw subtitle
     subtitle_surface = subtitle_font.render("Select Game Mode:", 0, LINE_COLOR_BLACK)
     subtitle_rectangle = subtitle_surface.get_rect(
         center=(WIDTH // 2, HEIGHT // 2))
@@ -83,11 +83,42 @@ def draw_game_start(screen):
         pygame.display.update()
 
 
+bottom_button_font = pygame.font.Font(None, 40)
+
 difficulty = draw_game_start(screen)
 screen.fill(BG_COLOR_IN_GAME)  # Screen represents window screen(predetermined width and height from constants.py)
 
 game_board = Board(BOARD_ROWS, BOARD_COLS, WIDTH, HEIGHT, screen, difficulty)
 Board.draw(game_board)
+# Initialize buttons
+# Initialize text first
+reset_text = bottom_button_font.render("RESET", 0, (255, 255, 255))
+restart_text = bottom_button_font.render("RESTART", 0, (255, 255, 255))
+exit_text = bottom_button_font.render("EXIT", 0, (255, 255, 255))
+
+# Initialize button background color and text
+reset_surface = pygame.Surface((reset_text.get_size()[0] + 20, reset_text.get_size()[1] + 20))
+reset_surface.fill(LINE_COLOR_BLACK)
+reset_surface.blit(reset_text, (10, 10))
+restart_surface = pygame.Surface((restart_text.get_size()[0] + 20, restart_text.get_size()[1] + 20))
+restart_surface.fill(LINE_COLOR_BLACK)
+restart_surface.blit(restart_text, (10, 10))
+exit_surface = pygame.Surface((exit_text.get_size()[0] + 20, exit_text.get_size()[1] + 20))
+exit_surface.fill(LINE_COLOR_BLACK)
+exit_surface.blit(exit_text, (10, 10))
+
+# Initialize button rectangle
+reset_rectangle = reset_surface.get_rect(
+    center=(WIDTH // 2 - 200, HEIGHT // 2 + 450))
+restart_rectangle = restart_surface.get_rect(
+    center=(WIDTH // 2, HEIGHT // 2 + 450))
+exit_rectangle = exit_surface.get_rect(
+    center=(WIDTH // 2 + 200, HEIGHT // 2 + 450))
+
+# Draw buttons
+screen.blit(reset_surface, reset_rectangle)
+screen.blit(restart_surface, restart_rectangle)
+screen.blit(exit_surface, exit_rectangle)
 
 pygame.display.update()
 
@@ -104,13 +135,64 @@ while True:
         if event.type == pygame.MOUSEBUTTONDOWN:
             x, y = event.pos
             print(x, y)
-            row, col = game_board.click(x, y)
-            print(row, col)  # click method
-            game_board.select(row, col, screen)  # select method
-        if event.type == pygame.KEYDOWN:
+            if y <= 900:
+                row, col = game_board.click(x, y)
+                print(row, col)  # click method
+                game_board.select(row, col, screen)  # select method
+            if y > 900:
+                if reset_rectangle.collidepoint(event.pos):  # THIS IS NOT WORKING
+                    game_board.reset_to_original()  # THIS SEEMS LIKE THE NEXT THING THAT NEEDS TO BE SORTED OUT
+                    Board.draw(game_board)  # UNCLEAR IF RESET TO ORIGINAL FUNCTION IS FUNCTIONING CORRECTLY
+                elif restart_rectangle.collidepoint(event.pos):
+                    print("Restart rectangle selected")
+                elif exit_rectangle.collidepoint(event.pos):
+                    print("Exit rectangle selected")
+        if event.type == pygame.KEYDOWN and game_board.selected_cell.value == 0:
             if event.key == pygame.K_1:
                 game_board.sketch(1)
                 print(game_board.selected_cell.row)
                 print(game_board.selected_cell.col)
+            elif event.key == pygame.K_2:
+                game_board.sketch(2)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_3:
+                game_board.sketch(3)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_4:
+                game_board.sketch(4)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_5:
+                game_board.sketch(5)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_6:
+                game_board.sketch(6)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_7:
+                game_board.sketch(7)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_8:
+                game_board.sketch(8)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_9:
+                game_board.sketch(9)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_RETURN:
+                game_board.place_number(game_board.selected_cell.sketched_value)
+
+            if game_board.is_full():  # THIS APPEARS TO WORK CORRECTLY
+                if game_board.check_board():
+                    print("Yay, you win!")  # PLAYED GAME MULTIPLE TIMES & EVERY TIME I WON, RECEIVED THIS STATEMENT
+                    break
+                else:
+                    print("Sorry, you lose!")  # PLAYED GAME MULTIPLE TIMES & EVERY TIME I LOST, RECEIVED THIS STATEMENT
+                    break
 
     pygame.display.update()
