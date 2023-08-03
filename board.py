@@ -132,7 +132,10 @@ class Board:
                     LINE_WIDTH
                 )
 
-    def draw(self):
+    def draw(self, screen):
+
+        self.screen.fill(BG_COLOR_IN_GAME)
+
         # draws the grid
         self.draw_grid()
 
