@@ -6,6 +6,7 @@ Project 4, Group 1
 UF COP 3502C in Summer 2023.
 """
 
+
 from cell import *
 from sudoku_generator import *
 from constants import *
@@ -105,7 +106,7 @@ class Board:
                     (WIDTH, i * SQUARE_SIZE),
                     MAIN_LINE_WIDTH
                 )
-            else:  # else, print normal line width
+            else:
                 pygame.draw.line(
                     self.screen,
                     LINE_COLOR_GRAY,
@@ -211,9 +212,7 @@ class Board:
         self.selected_cell.erase_sketched_number()
         if self.selected_cell.is_editable and self.selected_cell.value is not None:
             if sketched_value in range(0, self.rows + 1):
-                print(f"Sketch {sketched_value}")
                 self.selected_cell.sketched_value = sketched_value
-                print(f'selected cell sketched value is {self.selected_cell.sketched_value}')
                 self.selected_cell.draw()
 
     """
@@ -225,8 +224,6 @@ class Board:
         if self.selected_cell.is_editable and self.selected_cell is not None:
             if value in range(1, self.rows + 1):
                 self.selected_cell.value = value
-                print(f"cell {value}")
-                print(f'selected cell value is {self.selected_cell.value}')
                 self.selected_cell.draw()
                 self.selected_cell.erase_sketched_number()
                 self.selected_cell.is_editable = False
@@ -300,7 +297,7 @@ class Board:
         for i in range(self.rows):
             row_values = []
             for j in range(self.cols):
-                row_values.append(self.cells[i][j].value)  # FIXME check syntax
+                row_values.append(self.cells[i][j].value)
             if len(row_values) != len(set(row_values)):
                 return False
 
@@ -308,7 +305,7 @@ class Board:
         for i in range(self.cols):
             col_values = []
             for j in range(self.rows):
-                col_values.append(self.cells[i][j].value)  # FIXME check syntax
+                col_values.append(self.cells[i][j].value)
             if len(col_values) != len(set(col_values)):
                 return False
 
