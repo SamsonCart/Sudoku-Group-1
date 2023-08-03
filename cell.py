@@ -5,7 +5,6 @@ Authors: Samson Carter, Chance Nahuway, Dylan Dixon, Diamond Nicholas
 Project 4, Group 1
 UF COP 3502C in Summer 2023.
 """
-import cell
 from constants import *
 import pygame
 
@@ -42,8 +41,7 @@ class Cell:
         cell_7_surf = num_font.render('7', 0, NUMBER_COLOR)
         cell_8_surf = num_font.render('8', 0, NUMBER_COLOR)
         cell_9_surf = num_font.render('9', 0, NUMBER_COLOR)
-        cell_blank_surf = num_font.render('', 0, NUMBER_COLOR)
-
+        cell_0_surf = num_font.render('', 0, NUMBER_COLOR)
 
         if self.value == 1:
             cell_1_rect = cell_1_surf.get_rect(
@@ -81,65 +79,117 @@ class Cell:
             cell_9_rect = cell_9_surf.get_rect(
                 center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 2, self.col * SQUARE_SIZE + SQUARE_SIZE // 2))
             self.screen.blit(cell_9_surf, cell_9_rect)
-        else:
-            cell_blank_rect = cell_blank_surf.get_rect(
+        elif self.value == 0:
+            cell_0_rect = cell_0_surf.get_rect(
                 center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 2, self.col * SQUARE_SIZE + SQUARE_SIZE // 2))
-            self.screen.blit(cell_blank_surf, cell_blank_rect)
+            self.screen.blit(cell_0_surf, cell_0_rect)
 
-        num_font = pygame.font.Font(None, NUMBER_FONT)
-        sketched_cell_1_surf = num_font.render('1', 0, SKETCHED_NUMBER_COLOR)
-        sketched_cell_2_surf = num_font.render('2', 0, SKETCHED_NUMBER_COLOR)
-        sketched_cell_3_surf = num_font.render('3', 0, SKETCHED_NUMBER_COLOR)
-        sketched_cell_4_surf = num_font.render('4', 0, SKETCHED_NUMBER_COLOR)
-        sketched_cell_5_surf = num_font.render('5', 0, SKETCHED_NUMBER_COLOR)
-        sketched_cell_6_surf = num_font.render('6', 0, SKETCHED_NUMBER_COLOR)
-        sketched_cell_7_surf = num_font.render('7', 0, SKETCHED_NUMBER_COLOR)
-        sketched_cell_8_surf = num_font.render('8', 0, SKETCHED_NUMBER_COLOR)
-        sketched_cell_9_surf = num_font.render('9', 0, SKETCHED_NUMBER_COLOR)
-        sketched_cell_blank_surf = num_font.render('', 0, SKETCHED_NUMBER_COLOR)
-
-
+        sketched_num_font = pygame.font.Font(None, SKETCHED_NUMBER_FONT)
+        sketched_cell_1_surf = sketched_num_font.render('1', 0, SKETCHED_NUMBER_COLOR)
+        sketched_cell_2_surf = sketched_num_font.render('2', 0, SKETCHED_NUMBER_COLOR)
+        sketched_cell_3_surf = sketched_num_font.render('3', 0, SKETCHED_NUMBER_COLOR)
+        sketched_cell_4_surf = sketched_num_font.render('4', 0, SKETCHED_NUMBER_COLOR)
+        sketched_cell_5_surf = sketched_num_font.render('5', 0, SKETCHED_NUMBER_COLOR)
+        sketched_cell_6_surf = sketched_num_font.render('6', 0, SKETCHED_NUMBER_COLOR)
+        sketched_cell_7_surf = sketched_num_font.render('7', 0, SKETCHED_NUMBER_COLOR)
+        sketched_cell_8_surf = sketched_num_font.render('8', 0, SKETCHED_NUMBER_COLOR)
+        sketched_cell_9_surf = sketched_num_font.render('9', 0, SKETCHED_NUMBER_COLOR)
+        sketched_cell_0_surf = sketched_num_font.render('', 0, SKETCHED_NUMBER_COLOR)
 
         if self.sketched_value == 1:
             sketched_cell_1_rect = sketched_cell_1_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4, self.col * SQUARE_SIZE + SQUARE_SIZE // 3))
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
             self.screen.blit(sketched_cell_1_surf, sketched_cell_1_rect)
         elif self.sketched_value == 2:
             sketched_cell_2_rect = sketched_cell_2_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4, self.col * SQUARE_SIZE + SQUARE_SIZE // 3))
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
             self.screen.blit(sketched_cell_2_surf, sketched_cell_2_rect)
         elif self.sketched_value == 3:
             sketched_cell_3_rect = sketched_cell_3_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4, self.col * SQUARE_SIZE + SQUARE_SIZE // 3))
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
             self.screen.blit(sketched_cell_3_surf, sketched_cell_3_rect)
         elif self.sketched_value == 4:
             sketched_cell_4_rect = sketched_cell_4_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4, self.col * SQUARE_SIZE + SQUARE_SIZE // 3))
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
             self.screen.blit(sketched_cell_4_surf, sketched_cell_4_rect)
         elif self.sketched_value == 5:
             sketched_cell_5_rect = sketched_cell_5_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4, self.col * SQUARE_SIZE + SQUARE_SIZE // 3))
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
             self.screen.blit(sketched_cell_5_surf, sketched_cell_5_rect)
         elif self.sketched_value == 6:
             sketched_cell_6_rect = sketched_cell_6_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4, self.col * SQUARE_SIZE + SQUARE_SIZE // 3))
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
             self.screen.blit(sketched_cell_6_surf, sketched_cell_6_rect)
         elif self.sketched_value == 7:
             sketched_cell_7_rect = sketched_cell_7_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4, self.col * SQUARE_SIZE + SQUARE_SIZE // 3))
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
             self.screen.blit(sketched_cell_7_surf, sketched_cell_7_rect)
         elif self.sketched_value == 8:
             sketched_cell_8_rect = sketched_cell_8_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4, self.col * SQUARE_SIZE + SQUARE_SIZE // 3))
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
             self.screen.blit(sketched_cell_8_surf, sketched_cell_8_rect)
         elif self.sketched_value == 9:
             sketched_cell_9_rect = sketched_cell_9_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4, self.col * SQUARE_SIZE + SQUARE_SIZE // 3))
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
             self.screen.blit(sketched_cell_9_surf, sketched_cell_9_rect)
-        else:
-            sketched_cell_blank_rect = sketched_cell_blank_surf.get_rect(
-                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 2, self.col * SQUARE_SIZE + SQUARE_SIZE // 2))
-            self.screen.blit(sketched_cell_blank_surf, sketched_cell_blank_rect)
+        elif self.sketched_value == 0:
+            sketched_cell_0_rect = sketched_cell_0_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_0_surf, sketched_cell_0_rect)
+
+    def erase_sketched_number(self):
+        sketched_num_font = pygame.font.Font(None, SKETCHED_NUMBER_FONT)
+        sketched_cell_1_surf = sketched_num_font.render('1', 0, BG_COLOR_IN_GAME)
+        sketched_cell_2_surf = sketched_num_font.render('2', 0, BG_COLOR_IN_GAME)
+        sketched_cell_3_surf = sketched_num_font.render('3', 0, BG_COLOR_IN_GAME)
+        sketched_cell_4_surf = sketched_num_font.render('4', 0, BG_COLOR_IN_GAME)
+        sketched_cell_5_surf = sketched_num_font.render('5', 0, BG_COLOR_IN_GAME)
+        sketched_cell_6_surf = sketched_num_font.render('6', 0, BG_COLOR_IN_GAME)
+        sketched_cell_7_surf = sketched_num_font.render('7', 0, BG_COLOR_IN_GAME)
+        sketched_cell_8_surf = sketched_num_font.render('8', 0, BG_COLOR_IN_GAME)
+        sketched_cell_9_surf = sketched_num_font.render('9', 0, BG_COLOR_IN_GAME)
+        sketched_cell_0_surf = sketched_num_font.render('', 0, BG_COLOR_IN_GAME)
+
+        if self.sketched_value == 1:
+            sketched_cell_1_rect = sketched_cell_1_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_1_surf, sketched_cell_1_rect)
+        elif self.sketched_value == 2:
+            sketched_cell_2_rect = sketched_cell_2_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_2_surf, sketched_cell_2_rect)
+        elif self.sketched_value == 3:
+            sketched_cell_3_rect = sketched_cell_3_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_3_surf, sketched_cell_3_rect)
+        elif self.sketched_value == 4:
+            sketched_cell_4_rect = sketched_cell_4_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_4_surf, sketched_cell_4_rect)
+        elif self.sketched_value == 5:
+            sketched_cell_5_rect = sketched_cell_5_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_5_surf, sketched_cell_5_rect)
+        elif self.sketched_value == 6:
+            sketched_cell_6_rect = sketched_cell_6_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_6_surf, sketched_cell_6_rect)
+        elif self.sketched_value == 7:
+            sketched_cell_7_rect = sketched_cell_7_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_7_surf, sketched_cell_7_rect)
+        elif self.sketched_value == 8:
+            sketched_cell_8_rect = sketched_cell_8_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_8_surf, sketched_cell_8_rect)
+        elif self.sketched_value == 9:
+            sketched_cell_9_rect = sketched_cell_9_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_9_surf, sketched_cell_9_rect)
+        elif self.sketched_value == 0:
+            sketched_cell_0_rect = sketched_cell_0_surf.get_rect(
+                center=(self.row * SQUARE_SIZE + SQUARE_SIZE // 4.5, self.col * SQUARE_SIZE + SQUARE_SIZE // 4))
+            self.screen.blit(sketched_cell_0_surf, sketched_cell_0_rect)
 
         '''if self.is_selected is True:
             for i in range(self.row, self.row + 2):
