@@ -107,5 +107,10 @@ while True:
             row, col = game_board.click(x, y)
             print(row, col)  # click method
             game_board.select(row, col, screen)  # select method
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_1:
+                game_board.sketch(1)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
 
     pygame.display.update()
