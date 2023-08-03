@@ -6,8 +6,6 @@ Project 4, Group 1
 UF COP 3502C in Summer 2023.
 """
 
-
-import pygame
 from cell import *
 from sudoku_generator import *
 from constants import *
@@ -17,6 +15,7 @@ class Board:
     """
     Initializes a new Sudoku board object containing underlying cell objects.
     """
+
     def __init__(self, rows, cols, width, height, screen, difficulty):
         self.rows = rows
         self.cols = cols
@@ -39,6 +38,7 @@ class Board:
     """
     Returns 2D list containing underlying cell values. Mainly for debugging purposes.
     """
+
     def get_board_list(self):
         result = []
         for i in range(self.rows):
@@ -59,14 +59,14 @@ class Board:
     draw(self)'''
 
     def draw_grid(self):
-        #draw top boarder
+        # draw top boarder
         pygame.draw.line(
             self.screen,
             LINE_COLOR,
             (0, 0),
             (BOARD_ROWS * SQUARE_SIZE, 0),
             MAIN_LINE_WIDTH
-             )
+        )
 
         # draw right boarder
         pygame.draw.line(
@@ -132,20 +132,20 @@ class Board:
                     LINE_WIDTH
                 )
 
-
     def draw(self):
         # draws the grid
         self.draw_grid()
 
-            # draw the cells
+        # draw the cells
         for i in range(self.rows):
             for j in range(self.cols):
-                self.cells[i][j].draw() # pulls out each individual cell and runs it
-                                        # through Cell.draw
-    
+                self.cells[i][j].draw()  # pulls out each individual cell and runs it
+                # through Cell.draw
+
     """
     Marks the cell at (row, col) in the board as the current selected cell.
     """
+
     def select(self, row, col, screen):
         self.draw_grid()
         for i in range(self.rows):
@@ -159,7 +159,7 @@ class Board:
                 pygame.draw.line(
                     screen,
                     SELECTED_COLOR,
-                    ( i * SQUARE_SIZE, col * SQUARE_SIZE),
+                    (i * SQUARE_SIZE, col * SQUARE_SIZE),
                     (i * SQUARE_SIZE, (col + 1) * SQUARE_SIZE),
                     LINE_WIDTH
                 )
@@ -173,12 +173,12 @@ class Board:
                     LINE_WIDTH
                 )
 
-
     """
     If a tuple of (x,y) coordinates is within the displayed board,
     this function returns a tuple of the (row,col) of the cell which
     was clicked. Otherwise, the function returns None.
     """
+
     def click(self, x, y):
         if x < 0 or y < 0 or x > self.width or y > self.height:
             return None
@@ -193,6 +193,7 @@ class Board:
     Clears the selected cell. Note that the user can only remove the cell values 
     and sketched value that are filled by themselves.
     """
+
     def clear(self):
         if self.selected_cell is not None and self.selected_cell.is_editable:
             self.selected_cell.value = 0
@@ -202,37 +203,47 @@ class Board:
     Sets the sketched value of the current selected cell equal to user entered value.
     It will be displayed at the top left corner of the cell using the draw() function. 
     """
+
     def sketch(self, sketched_value):
-        #if self.selected_cell is not None and self.selected_cell.is_editable:
-            #if sketched_value in range(1, self.rows + 1):
+        self.selected_cell.erase_sketched_number()
+        if self.selected_cell.is_editable and self.selected_cell.value is not None:
+            if sketched_value in range(0, self.rows + 1):
                 print(f"Sketch {sketched_value}")
                 self.selected_cell.sketched_value = sketched_value
-                print(f'selected cell {self.selected_cell.sketched_value}')
+                print(f'selected cell sketched value is {self.selected_cell.sketched_value}')
                 self.selected_cell.draw()
 
     """
     Sets the value of the current selected cell equal to user-entered
     value. Called when user presses the Enter key.
     """
+
     def place_number(self, value):
-        if self.selected_cell is not None and self.selected_cell.is_editable:
+        if self.selected_cell.is_editable and self.selected_cell is not None:
             if value in range(1, self.rows + 1):
                 self.selected_cell.value = value
+                print(f"cell {value}")
+                print(f'selected cell value is {self.selected_cell.value}')
+                self.selected_cell.draw()
+                self.selected_cell.erase_sketched_number()
+                self.selected_cell.is_editable = False
 
     """
     Returns a Boolean value indicating whether the board is full or not. 
     """
+
     def is_full(self):
         for i in range(self.rows):
-            for cell in self.cells[i]:
-                if cell.value == 0:
+            for j in range(self.cols):
+                if self.cells[i][j].value == 0:
                     return False
-            return True
+        return True
 
     """
     Reset all cells in the board to their original values 
     (0 if cleared, otherwise the corresponding digit).
     """
+
     def reset_to_original(self):
         self.selected_cell = None
         self.cells = [
@@ -243,17 +254,19 @@ class Board:
     """
     Find an empty cell and returns its row and col as a tuple (x,y)
     """
+
     def find_empty(self):
         for i in range(self.rows):
             for cell in self.cells[i]:
                 if cell.value == 0:
                     return cell.row, cell.col
         return None
-        
+
     """
     Checks whether the Sudoku board is solved correctly by checking row, column, and box sums 
     as well as ensuring there are no duplicate numbers in each row, column or box.
     """
+
     def check_board(self):
         # check that row sum is equal to 45 for all 9 rows
         for i in range(self.rows):
@@ -272,7 +285,7 @@ class Board:
                 return False
 
         # check that box sum is equal to 45 for all 9 boxes
-        for (row_start, col_start) in [(0 ,0), (0, 3), (0, 6), (3, 0), (3, 0), (3, 3), (3, 6), (6, 0), (6, 3), (6, 6)]:
+        for (row_start, col_start) in [(0, 0), (0, 3), (0, 6), (3, 0), (3, 0), (3, 3), (3, 6), (6, 0), (6, 3), (6, 6)]:
             box_sum = 0
             for i in [0, 1, 2]:
                 for j in [0, 1, 2]:
@@ -306,5 +319,3 @@ class Board:
                 return False
 
         return True
-
-
