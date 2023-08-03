@@ -6,6 +6,7 @@ Project 4, Group 1
 UF COP 3502C in Summer 2023.
 """
 
+
 import pygame
 import sys
 from constants import *
@@ -116,7 +117,6 @@ def main():
     screen = pygame.display.set_mode((WIDTH, HEIGHT))  # set width and height of board
     pygame.display.set_caption('Sudoku')  # window screen name
 
-
     difficulty = draw_game_start(screen)
     screen.fill(BG_COLOR_IN_GAME)  # Screen represents window screen(predetermined width and height from constants.py)
 
@@ -186,76 +186,40 @@ def main():
             if event.type == pygame.KEYDOWN and game_board.selected_cell.value == 0:
                 if event.key == pygame.K_1:
                     game_board.sketch(1)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_2:
                     game_board.sketch(2)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_3:
                     game_board.sketch(3)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_4:
                     game_board.sketch(4)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_5:
                     game_board.sketch(5)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_6:
                     game_board.sketch(6)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_7:
                     game_board.sketch(7)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_8:
                     game_board.sketch(8)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_9:
                     game_board.sketch(9)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_KP1:
                     game_board.sketch(1)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_KP2:
                     game_board.sketch(2)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_KP3:
                     game_board.sketch(3)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_KP4:
                     game_board.sketch(4)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_KP5:
                     game_board.sketch(5)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_KP6:
                     game_board.sketch(6)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_KP7:
                     game_board.sketch(7)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_KP8:
                     game_board.sketch(8)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_KP9:
                     game_board.sketch(9)
-                    print(game_board.selected_cell.row)
-                    print(game_board.selected_cell.col)
                 elif event.key == pygame.K_RETURN:
                     game_board.place_number(game_board.selected_cell.sketched_value)
 
@@ -282,7 +246,7 @@ def main():
                     game_board.select(row, col, screen)
 
             if game_board.is_full():  # THIS APPEARS TO WORK CORRECTLY
-                if game_board.check_board(): # PLAYED GAME MULTIPLE TIMES & EVERY TIME I WON, RECEIVED THIS STATEMENT
+                if game_board.check_board():  # PLAYED GAME MULTIPLE TIMES & EVERY TIME I WON, RECEIVED THIS STATEMENT
                     # Initialize title font
                     gamewon_title_font = pygame.font.Font(None, 100)
                     button_font = pygame.font.Font(None, 50)
@@ -318,7 +282,7 @@ def main():
                             sys.exit()
 
                 else:
-                      # PLAYED GAME MULTIPLE TIMES & EVERY TIME I LOST, RECEIVED THIS STATEMENT
+                    # PLAYED GAME MULTIPLE TIMES & EVERY TIME I LOST, RECEIVED THIS STATEMENT
                     gameover_title_font = pygame.font.Font(None, 100)
                     button_font = pygame.font.Font(None, 50)
 
@@ -354,5 +318,6 @@ def main():
                             main()
 
         pygame.display.update()
+
 
 main()
