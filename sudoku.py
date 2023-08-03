@@ -82,6 +82,65 @@ def draw_game_start(screen):
                     return "hard"  # return hard removed cells value
         pygame.display.update()
 
+#game over screen - not called yet
+def draw_game_over(screen):
+    # Initialize title font
+    gameover_title_font = pygame.font.Font(None, 100)
+    button_font = pygame.font.Font(None, 50)
+
+    # Color background
+    screen.fill(BG_COLOR) #white background
+
+    # Initialize and draw title
+    gameover_title_surface = gameover_title_font.render("Game Over :(", 0, LINE_COLOR_BLACK)
+    gameover_title_rectangle = gameover_title_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 150))
+    screen.blit(gameover_title_surface, gameover_title_rectangle)
+
+    # Initialize button
+    # Initialize text first
+    restart_game_text = button_font.render("Restart", 0, (255, 255, 255))
+
+    # Initialize button background color and text
+    restart_game_surface = pygame.Surface((restart_game_text.get_size()[0] + 20, restart_game_text.get_size()[1] + 20))
+    restart_game_surface.fill(LINE_COLOR_BLACK)
+    restart_game_surface.blit(restart_game_text, (10, 10))
+
+    # Initialize button rectangle
+    restart_game_rectangle = restart_game_surface.get_rect(
+        center=(WIDTH // 2, HEIGHT // 2 + 150))
+    
+    # Draw button
+    screen.blit(restart_game_surface, restart_game_rectangle)
+
+#game won screen - not called yet
+def draw_game_won(screen):
+    # Initialize title font
+    gamewon_title_font = pygame.font.Font(None, 100)
+    button_font = pygame.font.Font(None, 50)
+
+    # Color background
+    screen.fill(BG_COLOR) #white background
+
+    # Initialize and draw title
+    gamewon_title_surface = gamewon_title_font.render("Game Won!", 0, LINE_COLOR_BLACK)
+    gamewon_title_rectangle = gamewon_title_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 150))
+    screen.blit(gamewon_title_surface, gamewon_title_rectangle)
+
+    # Initialize button
+    # Initialize text first
+    exit_game_text = button_font.render("Exit", 0, (255, 255, 255))
+
+    # Initialize button background color and text
+    exit_game_surface = pygame.Surface((exit_game_text.get_size()[0] + 20, exit_game_text.get_size()[1] + 20))
+    exit_game_surface.fill(LINE_COLOR_BLACK)
+    exit_game_surface.blit(exit_game_text, (10, 10))
+
+    # Initialize button rectangle
+    exit_game_rectangle = exit_game_surface.get_rect(
+        center=(WIDTH // 2, HEIGHT // 2 + 150))
+    
+    # Draw button
+    screen.blit(exit_game_surface, exit_game_rectangle)
 
 bottom_button_font = pygame.font.Font(None, 40)
 
@@ -181,6 +240,42 @@ while True:
                 print(game_board.selected_cell.row)
                 print(game_board.selected_cell.col)
             elif event.key == pygame.K_9:
+                game_board.sketch(9)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_KP1:
+                game_board.sketch(1)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_KP2:
+                game_board.sketch(2)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_KP3:
+                game_board.sketch(3)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_KP4:
+                game_board.sketch(4)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_KP5:
+                game_board.sketch(5)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_KP6:
+                game_board.sketch(6)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_KP7:
+                game_board.sketch(7)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_KP8:
+                game_board.sketch(8)
+                print(game_board.selected_cell.row)
+                print(game_board.selected_cell.col)
+            elif event.key == pygame.K_KP9:
                 game_board.sketch(9)
                 print(game_board.selected_cell.row)
                 print(game_board.selected_cell.col)
