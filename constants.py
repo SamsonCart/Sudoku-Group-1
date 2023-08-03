@@ -6,6 +6,7 @@ Project 4, Group 1
 UF COP 3502C in Summer 2023.
 """
 
+
 # Dimensional constants
 WIDTH = 900
 HEIGHT = 1000
